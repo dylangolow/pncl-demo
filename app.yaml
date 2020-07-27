@@ -1,0 +1,17 @@
+runtime: nodejs12
+env: standard
+instance_class: F4
+automatic_scaling:
+  min_instances: 1
+  max_instances: 5
+  min_idle_instances: 1
+  max_idle_instances: automatic
+  min_pending_latency: automatic
+  max_pending_latency: automatic
+network: {}
+inbound_services:
+  - warmup
+env_variables:
+  GOOGLE_APPLICATION_CREDENTIALS: "./credentials.json"
+  FIREBASE_PROJECT: "pncl-demo"
+  GCLOUD_STORAGE_BUCKET: "pncl-demo.appspot.com"
