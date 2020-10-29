@@ -8,6 +8,7 @@ import authorize from "../middleware/authorize";
 
 const router: Router = require('express').Router();
 router.get('/login/:username/:password', login);
+router.post('/login', loginNew);
 router.use(authorize());
 router.post('/upload', uploadFunc());
 router.get('/parse/:url', parseURL);
@@ -16,6 +17,13 @@ router.get('/download/:identifier', downloadFunc);
 
 function login(req: Request, res: Response, next: NextFunction) {
     const {username, password} = req.params;
+    authenticate({username, password})
+        .then(result => res.json(result))
+        .catch(err => next(err));
+}
+
+function loginNew(req: Request, res: Response, next: NextFunction) {
+    const {username: username, password: password} = req.body;
     authenticate({username, password})
         .then(result => res.json(result))
         .catch(err => next(err));
