@@ -23,7 +23,7 @@ function login(req: Request, res: Response, next: NextFunction) {
 }
 
 function loginNew(req: Request, res: Response, next: NextFunction) {
-    const {username: username, password: password} = req.body;
+    const {username, password} = req.body;
     authenticate({username, password})
         .then(result => res.json(result))
         .catch(err => next(err));
